@@ -8,7 +8,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func (s *session) auth() error {
+func (s *session) Auth() error {
 	vaultConfig := &api.Config{
 		Address: s.URL,
 	}

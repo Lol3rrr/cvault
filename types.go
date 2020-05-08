@@ -4,7 +4,7 @@ import "github.com/hashicorp/vault/api"
 
 // Session is used to interact with Vault
 type Session interface {
-	auth() error
+	Auth() error
 
 	ReadData(name string) (*api.Secret, error)
 	Renew(id string, interval int) (*api.Secret, error)

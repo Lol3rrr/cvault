@@ -7,5 +7,5 @@ func CreateSession(url, roleID, roleSecret string) (Session, error) {
 		RoleSecret: roleSecret,
 	}
 
-	return result, result.auth()
+	return result, result.Auth()
 }
