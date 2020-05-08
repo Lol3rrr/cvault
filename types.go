@@ -18,3 +18,5 @@ type session struct {
 	RoleSecret string
 	Client     *api.Client
 }
+
+type onFailedRenew func()
