@@ -7,7 +7,7 @@ type Session interface {
 	auth() error
 
 	ReadData(name string) (*api.Secret, error)
-	RenewDataForever(secret *api.Secret, interval int)
+	RenewDataForever(secret *api.Secret, interval int, callback onFailedRenew)
 
 	WriteMapData(name string, data map[string]interface{}) error
 }
