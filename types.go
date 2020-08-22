@@ -8,6 +8,9 @@ type Session interface {
 	// and automatically renews the Session afterwards forever
 	Auth() error
 
+	// ReadMap is used to read Data from vault and convert it
+	// to a map which makes it easier to work with
+	ReadMap(name string) (map[string]interface{}, error)
 	// ReadData is used to read the Data from vault for the
 	// given path
 	ReadData(name string) (*api.Secret, error)

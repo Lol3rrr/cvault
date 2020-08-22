@@ -1,12 +1,8 @@
 package cvault
 
-import (
-	"errors"
+import "errors"
 
-	"github.com/hashicorp/vault/api"
-)
-
-func (s *session) ReadData(name string) (*api.Secret, error) {
+func (s *session) ReadMap(name string) (map[string]interface{}, error) {
 	resp, err := s.Client.Logical().Read(name)
 	if err != nil {
 		return nil, err
@@ -19,5 +15,10 @@ func (s *session) ReadData(name string) (*api.Secret, error) {
 		return nil, errors.New("No Data was returned")
 	}
 
-	return resp, nil
+	data, worked := resp.Data["data"].(map[string]interface{})
+	if !worked {
+		return nil, errors.New("Could not convert Data to map")
+	}
+
+	return data, nil
 }
