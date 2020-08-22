@@ -20,7 +20,7 @@ type Session interface {
 	// RenewDataForever is used to Renew the secret forever and
 	// extends the lease by the given interval
 	// calls the callback in case of an error
-	RenewDataForever(secret *api.Secret, interval int, callback onFailedRenew)
+	RenewDataForever(secret *api.Secret, interval int, callback OnFailedRenew)
 
 	// WriteMapData writes the given data for the name to vault
 	WriteMapData(name string, data map[string]interface{}) error
@@ -37,4 +37,4 @@ type session struct {
 	Client     *api.Client
 }
 
-type onFailedRenew func()
+type OnFailedRenew func()
