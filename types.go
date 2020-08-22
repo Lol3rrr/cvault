@@ -37,4 +37,5 @@ type session struct {
 	Client     *api.Client
 }
 
+// OnFailedRenew is a simple callback function type
 type OnFailedRenew func()
