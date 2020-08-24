@@ -1,7 +1,6 @@
 package mocks
 
 import (
-	"github.com/Lol3rrr/cvault"
 	"github.com/hashicorp/vault/api"
 	"github.com/stretchr/testify/mock"
 )
@@ -36,7 +35,7 @@ func (m *MockSession) Renew(id string, interval int) (*api.Secret, error) {
 }
 
 // RenewDataForever is needed to satisfy the interface
-func (m *MockSession) RenewDataForever(secret *api.Secret, interval int, callback cvault.OnFailedRenew) {
+func (m *MockSession) RenewDataForever(secret *api.Secret, interval int, callback func()) {
 	m.Mock.Called(secret, interval, callback)
 	return
 }

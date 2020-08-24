@@ -7,7 +7,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func (s *session) RenewDataForever(secret *api.Secret, interval int, callback OnFailedRenew) {
+func (s *session) RenewDataForever(secret *api.Secret, interval int, callback func()) {
 	go func() {
 		for {
 			_, err := s.Client.Sys().Renew(secret.LeaseID, interval)
