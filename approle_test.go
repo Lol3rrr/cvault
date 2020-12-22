@@ -16,7 +16,7 @@ func TestNewApprole(t *testing.T) {
 	assert.Equal(t, inputSecret, outApprole.RoleSecret)
 }
 
-func TestGetLoginEndpoint(t *testing.T) {
+func TestGetLoginEndpoint_Approle(t *testing.T) {
 	inputAuth := &ApproleAuth{
 		RoleID:     "testID",
 		RoleSecret: "testSecret",
@@ -25,7 +25,7 @@ func TestGetLoginEndpoint(t *testing.T) {
 	assert.Equal(t, "auth/approle/login", inputAuth.GetLoginEndpoint())
 }
 
-func TestGetLoginData(t *testing.T) {
+func TestGetLoginData_Approle(t *testing.T) {
 	inputAuth := &ApproleAuth{
 		RoleID:     "testID",
 		RoleSecret: "testSecret",
