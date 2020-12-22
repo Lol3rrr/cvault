@@ -17,11 +17,7 @@ func (s *session) Auth() error {
 		return err
 	}
 
-	vaultData := map[string]interface{}{
-		"role_id":   s.RoleID,
-		"secret_id": s.RoleSecret,
-	}
-	resp, err := vaultClient.Logical().Write("auth/approle/login", vaultData)
+	resp, err := vaultClient.Logical().Write(s.AuthData.GetLoginEndpoint(), s.AuthData.GetLoginData())
 	if err != nil {
 		return err
 	}
@@ -33,7 +29,6 @@ func (s *session) Auth() error {
 	s.Client = vaultClient
 
 	if resp.Auth.Renewable {
-
 		go func() {
 			for {
 				s, err := vaultClient.Auth().Token().RenewSelf(resp.LeaseDuration)

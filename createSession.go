@@ -1,10 +1,9 @@
 package cvault
 
-func CreateSession(url, roleID, roleSecret string) (Session, error) {
+func CreateSession(url string, auth Auth) (Session, error) {
 	result := &session{
-		URL:        url,
-		RoleID:     roleID,
-		RoleSecret: roleSecret,
+		URL:      url,
+		AuthData: auth,
 	}
 
 	return result, result.Auth()

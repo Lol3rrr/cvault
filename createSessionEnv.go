@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func CreateSessionEnv() (Session, error) {
+func CreateApproleSessionEnv() (Session, error) {
 	vaultURL, found := os.LookupEnv("VAULT_URL")
 	if !found {
 		vaultURL = "http://localhost:8200"
@@ -19,5 +19,7 @@ func CreateSessionEnv() (Session, error) {
 		return nil, errors.New("Env-Variable 'APPROLE_SECRET' could not be found")
 	}
 
-	return CreateSession(vaultURL, appRoleID, appRoleSecret)
+	approleAuth := NewApprole(appRoleID, appRoleSecret)
+
+	return CreateSession(vaultURL, approleAuth)
 }

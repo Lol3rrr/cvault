@@ -2,6 +2,11 @@ package cvault
 
 import "github.com/hashicorp/vault/api"
 
+type Auth interface {
+	GetLoginData() map[string]interface{}
+	GetLoginEndpoint() string
+}
+
 // Session is used to interact with Vault
 type Session interface {
 	// Auth authenticates the current Session with vault
@@ -31,8 +36,7 @@ type Session interface {
 }
 
 type session struct {
-	URL        string
-	RoleID     string
-	RoleSecret string
-	Client     *api.Client
+	URL      string
+	AuthData Auth
+	Client   *api.Client
 }
